@@ -1,18 +1,21 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-        </div>
-        <div class="navbar-menu">
-        </div>
-    </nav>
+<div class="columns is-desktop is-gapless">
+    <div class="column"></div>
+    <div class="column is-three-fifths">
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+                </div>
+            </div>
+        </nav>
 
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        <div class="content">
+            @Body
+        </div>
     </div>
-
-    <div class="content px-4">
-        @Body
-    </div>
+    <div class="column"></div>
 </div>
