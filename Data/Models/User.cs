@@ -1,3 +1,5 @@
+using System;
+
 namespace BlazorCommerce.Data.Models
 {
     public class User
@@ -5,5 +7,9 @@ namespace BlazorCommerce.Data.Models
         public int Id { get; set; }
 
         public string Email { get; set; }
+
+        public string Hash { get; set; }
+
+        public DateTime CreatedAt { get; set; }
     }
 }

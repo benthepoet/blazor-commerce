@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BlazorCommerce.Data.Models
 {
@@ -17,5 +18,7 @@ namespace BlazorCommerce.Data.Models
         public int BillAddressId { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public List<OrderLine> OrderLines { get; set; }
     }    
 }
