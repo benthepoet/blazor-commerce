@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlazorCommerce.Data.Services
@@ -12,17 +11,8 @@ namespace BlazorCommerce.Data.Services
             _context = context;
         }
 
-        public Task CreateOrder(Models.Cart cart)
+        public Task CreateOrder(Models.Order order)
         {
-            var order = new Models.Order {
-                OrderLines = cart.CartLines
-                    .Select(x => new Models.OrderLine {
-                        ProductVariantId = x.ProductVariantId,
-                        Quantity = x.Quantity
-                    })
-                    .ToList()
-            };
-
             _context.Order.Add(order);
             return _context.SaveChangesAsync();
         }
