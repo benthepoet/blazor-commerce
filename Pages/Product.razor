@@ -6,43 +6,44 @@
 <p>@Model.Description</p>
 
 <div class="field">
-    
-    <table class="table">
-        <thead>
+    <form>
+        <table class="table">
+            <thead>
             <th>Variant</th>
             <th>Price</th>
             <th>Quantity</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="field">
-                        <div class="control">
-                            <select value="@ProductVariantId" @onchange="UpdateProductVariant">
-                                @foreach (var productVariant in Model.ProductVariants)
-                                {
-                                    <option value="@productVariant.Id">@productVariant.Name</option>
-                                }
-                            </select>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="field">
+                            <div class="control">
+                                <div class="select is-small">
+                                    <select value="@ProductVariantId" @onchange="UpdateProductVariant" required>
+                                        @foreach (var productVariant in Model.ProductVariants)
+                                        {
+                                            <option value="@productVariant.Id">@productVariant.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>@string.Format("{0:C}", Price)</td>
-                <td>
-                    <form>
+                    </td>
+                    <td>@string.Format("{0:C}", Price)</td>
+                    <td>
                         <div class="field has-addons">
                             <div class="control">
-                                <input type="number" min="1" @bind="Quantity" />
+                                <input type="number" min="1" class="input is-small" @bind="Quantity" required />
                             </div>
                             <div class="control">
                                 <button type="submit" class="button is-link">Add to Cart</button>
                             </div>
                         </div>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 
 @code {
