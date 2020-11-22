@@ -25,8 +25,7 @@ namespace BlazorCommerce
             services.AddDbContext<Data.DataContext>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("DataContext")));
 
-            services.AddScoped<Data.Services.CategoryService>();
-            services.AddScoped<Data.Services.ProductService>();
+            services.AddScoped<Data.Services.CatalogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
