@@ -1,3 +1,5 @@
+using System;
+
 namespace BlazorCommerce.Data.Models
 {
     public class Payment

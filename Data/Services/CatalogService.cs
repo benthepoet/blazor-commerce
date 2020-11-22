@@ -14,16 +14,23 @@ namespace BlazorCommerce.Data.Services
             _context = context;
         }
 
-        public Task<List<Models.Category>> GetCategories()
+        public Task<Models.Category[]> GetCategories()
         {
-            return _context.Category.ToListAsync();
+            return _context.Category.ToArrayAsync();
         }
 
-        public Task<List<Models.Product>> GetProductsByCategory(int categoryId)
+        public Task<Models.Category> GetCategoryWithProducts(int id)
         {
+            return _context.Category
+                .Include(x => x.Products)
+                .ThenInclude(x => x.ProductVariants)
+                .SingleAsync(x => x.Id == id);
+        }
+
+        public Task<Models.Product> GetProductWithVariants(int id) {
             return _context.Product
-                .Where(x => x.CategoryId == categoryId)
-                .ToListAsync();
+                .Include(x => x.ProductVariants)
+                .SingleAsync(x => x.Id == id);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@inject Data.Services.CategoryService CategoryService
+@inject Data.Services.CatalogService CatalogService
 
 <div class="columns is-desktop is-gapless">
     <div class="column"></div>
@@ -22,10 +22,10 @@
 </div>
 
 @code {
-    public List<Data.Models.Category> Categories { get; set; }
+    public Data.Models.Category[] Categories { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Categories = await CategoryService.GetCategories();
+        Categories = await CatalogService.GetCategories();
     }
 }
