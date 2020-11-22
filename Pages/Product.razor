@@ -1,0 +1,22 @@
+@page "/category/product/{ProductId}"
+@inject Data.Services.CatalogService CatalogService
+
+<h2>@Model.Name</h2>
+
+<p>@Model.Description</p>
+
+<button type="button">
+    Add To Cart
+</button>
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    public Data.Models.Product Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await CatalogService.GetProductWithVariants(ProductId);
+    }
+}

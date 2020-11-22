@@ -1,0 +1,23 @@
+@page "/category/{CategoryId}"
+@inject Data.Services.CatalogService CatalogService
+
+<div class="columns">
+    @foreach (var product in Model.Products)
+    {
+        <div class="column is-one-fifth">
+            @product.Name
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int CategoryId { get; set; }
+
+    public Data.Models.Category Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await CatalogService.GetCategoryWithProducts(CategoryId);
+    }
+}

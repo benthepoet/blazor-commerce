@@ -10,6 +10,12 @@
                     <a class="navbar-item">
                         Home
                     </a>
+                    @foreach (var category in Categories)
+                    {
+                        <a class="navbar-item">
+                            @category.Name
+                        </a>
+                    }
                 </div>
             </div>
         </nav>
