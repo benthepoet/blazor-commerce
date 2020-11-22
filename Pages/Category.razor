@@ -12,12 +12,12 @@
 
 @code {
     [Parameter]
-    public int CategoryId { get; set; }
+    public string CategoryId { get; set; }
 
     public Data.Models.Category Model { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await CatalogService.GetCategoryWithProducts(CategoryId);
+        Model = await CatalogService.GetCategoryWithProducts(int.Parse(CategoryId));
     }
 }

@@ -5,18 +5,67 @@
 
 <p>@Model.Description</p>
 
-<button type="button">
-    Add To Cart
-</button>
+<div class="field">
+    
+    <table class="table">
+        <thead>
+            <th>Variant</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="field">
+                        <div class="control">
+                            <select value="@ProductVariantId" @onchange="UpdateProductVariant">
+                                @foreach (var productVariant in Model.ProductVariants)
+                                {
+                                    <option value="@productVariant.Id">@productVariant.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </td>
+                <td>@string.Format("{0:C}", Price)</td>
+                <td>
+                    <form>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input type="number" min="1" @bind="Quantity" />
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-link">Add to Cart</button>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 @code {
     [Parameter]
-    public int ProductId { get; set; }
+    public string ProductId { get; set; }
+
+    public int ProductVariantId { get; set; }
+
+    public int Quantity { get; set; }
+
+    public decimal Price { get; set; }
 
     public Data.Models.Product Model { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await CatalogService.GetProductWithVariants(ProductId);
+        Model = await CatalogService.GetProductWithVariants(int.Parse(ProductId));
+    }
+
+    private void UpdateProductVariant(ChangeEventArgs eventArgs) 
+    {
+        ProductVariantId = int.Parse(eventArgs.Value.ToString());
+        var variant = Model.ProductVariants.First(x => x.Id == ProductVariantId);
+        Price = variant.Price;
     }
 }
